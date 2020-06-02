@@ -23,6 +23,8 @@ public class EGA_Laser : MonoBehaviour
     private ParticleSystem[] Effects;
     private ParticleSystem[] Hit;
 
+    private CheckLaserActive currentCube;
+    //EGA_Laser reflectedLaser = null;
     void Start ()
     {
         //Get LineRender and ParticleSystem components from current prefab;  
@@ -57,6 +59,10 @@ public class EGA_Laser : MonoBehaviour
                 //Texture tiling
                 Length[0] = MainTextureLength * (Vector3.Distance(transform.position, hit.point));
                 Length[2] = NoiseTextureLength * (Vector3.Distance(transform.position, hit.point));
+                //Check if hit reflexion
+                //CheckReflexion(hit);
+                //Check if hit is an end
+                CheckActivate(hit);
             }
             else
             {
@@ -80,6 +86,42 @@ public class EGA_Laser : MonoBehaviour
                 Laser.enabled = true;
             }
         }  
+    }
+    /*
+    private void CheckReflexion(RaycastHit hit)
+    {
+        if (hit.collider.CompareTag("ReflexionCube"))
+        {
+            if (reflectedLaser == null)
+            {
+                reflectedLaser = Instantiate(this, hit.point + hit.normal * HitOffset, hit.collider.transform.rotation);
+            }
+        }
+        else if (reflectedLaser != null)
+        {
+            Destroy(reflectedLaser);
+        }
+    }
+    */
+    private void CheckActivate(RaycastHit hit)
+    {
+        CheckLaserActive finalCube = hit.collider.GetComponent<CheckLaserActive>();
+        if (finalCube != null)
+        {
+            if (currentCube == null)
+            {
+                currentCube = finalCube;
+            }
+            if (currentCube == finalCube)
+            {
+                finalCube.laserHit = true;
+            }
+        }
+        else if (currentCube != null)
+        {
+            currentCube.laserHit = false;
+            currentCube = null;
+        }
     }
 
     public void DisablePrepare()
