@@ -25,12 +25,17 @@ public class EGA_Laser : MonoBehaviour
 
     private CheckLaserActive currentCube;
     //EGA_Laser reflectedLaser = null;
+
+
+    BoxCollider boxColl;
     void Start ()
     {
         //Get LineRender and ParticleSystem components from current prefab;  
         Laser = GetComponent<LineRenderer>();
         Effects = GetComponentsInChildren<ParticleSystem>();
         Hit = HitEffect.GetComponentsInChildren<ParticleSystem>();
+
+        boxColl = GetComponent<BoxCollider>();
 
         Laser.useWorldSpace = true;
     }
@@ -47,6 +52,8 @@ public class EGA_Laser : MonoBehaviour
        
             if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, MaxLength))
             {
+               
+
                 //End laser position if collides with object
                 Laser.SetPosition(1, hit.point);
                 HitEffect.transform.position = hit.point + hit.normal * HitOffset;
@@ -85,8 +92,15 @@ public class EGA_Laser : MonoBehaviour
                 LaserSaver = true;
                 Laser.enabled = true;
             }
+
+            boxColl.size = new Vector3(boxColl.size.x, boxColl.size.y, Vector3.Distance(transform.position, hit.point));
+            boxColl.center = new Vector3(boxColl.center.x, boxColl.center.y, Vector3.Distance(transform.position, hit.point)/2);
+
+            print(hit.collider.transform.tag);
         }  
     }
+
+
     /*
     private void CheckReflexion(RaycastHit hit)
     {
