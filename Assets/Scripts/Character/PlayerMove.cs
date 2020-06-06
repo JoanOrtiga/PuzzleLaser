@@ -9,7 +9,11 @@ public class PlayerMove : MonoBehaviour
 
     private CharacterController characterController;
 
-    [SerializeField] private float movementSpeed;
+    [SerializeField] private float walkSpeed, runSpeed;
+    [SerializeField] private float runBuildUp;
+    [SerializeField] private KeyCode runKey;
+
+    private float movementSpeed;
 
     [SerializeField] private AnimationCurve jumpFallOff;
     [SerializeField] private float jumpMultiplier;
@@ -29,15 +33,28 @@ public class PlayerMove : MonoBehaviour
 
     private void PlayerMovement()
     {
-        float vertInput = Input.GetAxis(VerticalInputName) * movementSpeed;
-        float horizInput = Input.GetAxis(horizontalInputName) * movementSpeed;
+        float vertInput = Input.GetAxis(VerticalInputName);
+        float horizInput = Input.GetAxis(horizontalInputName);
 
         Vector3 forwardMovement = transform.forward * vertInput;
         Vector3 rightMovement = transform.right * horizInput;
 
-        characterController.SimpleMove(forwardMovement + rightMovement);
+        characterController.SimpleMove(Vector3.ClampMagnitude(forwardMovement + rightMovement, 1.0f) * movementSpeed);
 
+        SetMovementSpeed();
         JumpInput();
+    }
+
+    private void SetMovementSpeed()
+    {
+        if (Input.GetKey(runKey))
+        {
+            movementSpeed = Mathf.Lerp(movementSpeed, runSpeed, Time.deltaTime * runBuildUp);
+        }
+        else
+        {
+            movementSpeed = Mathf.Lerp(movementSpeed, walkSpeed, Time.deltaTime * runBuildUp);
+        }
     }
 
     private void JumpInput()

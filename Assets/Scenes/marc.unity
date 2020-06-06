@@ -153,7 +153,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   horizontalInputName: Horizontal
   VerticalInputName: Vertical
-  movementSpeed: 5
+  walkSpeed: 5
+  runSpeed: 8
+  runBuildUp: 1
+  runKey: 304
   jumpFallOff:
     serializedVersion: 2
     m_Curve:
@@ -987,7 +990,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
+  near clip plane: 0.1
   far clip plane: 1000
   field of view: 60
   orthographic: 0
