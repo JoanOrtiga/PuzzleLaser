@@ -31,6 +31,7 @@ public class GrabObject : MonoBehaviour
         if (grabbedObject)
         {
             grabbedObject.velocity = 10 * (guide.position - grabbedObject.position);
+
         }
     }
 }
