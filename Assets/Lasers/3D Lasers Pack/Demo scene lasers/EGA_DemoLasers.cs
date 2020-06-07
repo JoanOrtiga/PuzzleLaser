@@ -48,7 +48,7 @@ public class EGA_DemoLasers : MonoBehaviour
         //Disable lazer prefab
         if (Input.GetMouseButtonUp(0))
         {
-            LaserScript.DisablePrepare();
+           // LaserScript.DisablePrepare();
             Destroy(Instance,1);
         }
 
