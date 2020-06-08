@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class AnimateDoor : MonoBehaviour
 {
-    [SerializeField] private float lerpPos = 1;
+    [SerializeField] private float lerpPosActive = 1;
+    [SerializeField] private float lerpPosDes = 1;
     [SerializeField] private float lerpRot = 1;
     [SerializeField] private float lerpScale = 1;
 
@@ -40,11 +41,11 @@ public class AnimateDoor : MonoBehaviour
         {
             if (isActive)
             {
-                transform.position = Vector3.LerpUnclamped(transform.position, finalPos, lerpPos * Time.deltaTime);
+                transform.position = Vector3.LerpUnclamped(transform.position, finalPos, lerpPosActive * Time.deltaTime);
             }
             else
             {
-                transform.position = Vector3.LerpUnclamped(transform.position, initialPos, lerpPos * Time.deltaTime);
+                transform.position = Vector3.LerpUnclamped(transform.position, initialPos, lerpPosDes * Time.deltaTime);
             }
         }
 
@@ -52,11 +53,11 @@ public class AnimateDoor : MonoBehaviour
         {
             if (isActive)
             {
-                transform.position = Vector3.Lerp(transform.position, finalPos, lerpPos);
+                transform.position = Vector3.Lerp(transform.position, finalPos, lerpRot);
             }
             else
             {
-                transform.position = Vector3.Lerp(transform.position, finalPos, lerpPos);
+                transform.position = Vector3.Lerp(transform.position, finalPos, lerpRot);
             }
         }
 

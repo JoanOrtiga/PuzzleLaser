@@ -797,7 +797,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 638ad2c7f5f193948b054eb81ed87853, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lerpPos: 1
+  lerpPosActive: 1
+  lerpPosDes: 2
   lerpRot: 1
   lerpScale: 1
   finalPos: {x: 10, y: 0.829, z: -4.197}
@@ -874,7 +875,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 185823342}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 10, y: 0.829, z: -2.217}
+  m_LocalPosition: {x: 10, y: 0.829, z: -2.37}
   m_LocalScale: {x: 0.17381, y: 3, z: 2}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2697,7 +2698,7 @@ PrefabInstance:
     - target: {fileID: 6651515701525291698, guid: 4d3da7cc4ad9b26499db798f4183a420,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.81
+      value: -0.83
       objectReference: {fileID: 0}
     - target: {fileID: 6651515701525291698, guid: 4d3da7cc4ad9b26499db798f4183a420,
         type: 3}
