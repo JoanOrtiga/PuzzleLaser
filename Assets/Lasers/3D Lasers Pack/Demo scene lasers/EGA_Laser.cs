@@ -45,6 +45,8 @@ public class EGA_Laser : MonoBehaviour
     private RaycastHit hit;
     private Vector3 direction;
 
+    private Collision lastKnownActivable;
+
     void Update()
     {
         // boxColl.size = new Vector3(boxColl.size.x, boxColl.size.y, Vector3.Distance(transform.position, hit.point));
@@ -77,6 +79,10 @@ public class EGA_Laser : MonoBehaviour
                     if(hit.collider.tag == "Activable")
                     {
                         hit.collider.GetComponent<CheckLaserActive>().laserHit = true;
+                    }
+                    else
+                    {
+
                     }
 
                     if (hit.collider.tag != "Mirror")

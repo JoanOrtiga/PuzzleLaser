@@ -1,16 +1,24 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class CheckLaserActive : MonoBehaviour
 {
     [HideInInspector] public bool laserHit = false;
     public GameObject[] children;
-    void Update()
+
+    public UnityEvent activate;
+
+    public void changeState()
     {
+        laserHit = !laserHit;
+
         if (laserHit)
         {
             GetComponent<MeshRenderer>().material.SetColor("_BaseColor", Color.green);
+
+            activate.Invoke();
 
             foreach (GameObject item in children)
             {
@@ -19,6 +27,9 @@ public class CheckLaserActive : MonoBehaviour
         }
         else
         {
+
+            activate.Invoke();
+
             GetComponent<MeshRenderer>().material.SetColor("_BaseColor", Color.red);
 
             foreach (GameObject item in children)
@@ -26,7 +37,10 @@ public class CheckLaserActive : MonoBehaviour
                 item.GetComponent<MeshRenderer>().material.SetColor("_BaseColor", Color.red);
             }
         }
+    }
 
+    private void LateUpdate()
+    {
         laserHit = false;
     }
 }
