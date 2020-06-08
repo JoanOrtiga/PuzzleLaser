@@ -12,8 +12,10 @@ public class CheckLaserActive : MonoBehaviour
 
     public void changeState()
     {
+        print(laserHit);
         laserHit = !laserHit;
 
+        
         if (laserHit)
         {
             GetComponent<MeshRenderer>().material.SetColor("_BaseColor", Color.green);
@@ -37,10 +39,5 @@ public class CheckLaserActive : MonoBehaviour
                 item.GetComponent<MeshRenderer>().material.SetColor("_BaseColor", Color.red);
             }
         }
-    }
-
-    private void LateUpdate()
-    {
-        laserHit = false;
     }
 }

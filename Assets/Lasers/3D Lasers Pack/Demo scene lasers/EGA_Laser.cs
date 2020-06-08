@@ -14,7 +14,7 @@ public class EGA_Laser : MonoBehaviour
 
     public float MainTextureLength = 1f;
     public float NoiseTextureLength = 1f;
-    private Vector4 Length = new Vector4(1,1,1,1);
+    private Vector4 Length = new Vector4(1, 1, 1, 1);
 
     //One activation per shoot
     private bool LaserSaver = false;
@@ -26,8 +26,11 @@ public class EGA_Laser : MonoBehaviour
     private CheckLaserActive currentCube;
 
 
+    private GameObject lastActivator = null;
+    private bool lastActivatorExist = true;
+
     BoxCollider boxColl;
-    void Start ()
+    void Start()
     {
         //Get LineRender and ParticleSystem components from current prefab;  
         Laser = GetComponent<LineRenderer>();
@@ -37,6 +40,8 @@ public class EGA_Laser : MonoBehaviour
         boxColl = GetComponent<BoxCollider>();
 
         Laser.useWorldSpace = true;
+
+        lastActivator = null;
     }
 
 
@@ -76,14 +81,31 @@ public class EGA_Laser : MonoBehaviour
                     Length[0] = MainTextureLength * (Vector3.Distance(transform.position, hit.point));
                     Length[2] = NoiseTextureLength * (Vector3.Distance(transform.position, hit.point));
 
-                    if(hit.collider.tag == "Activable")
-                    {
-                        hit.collider.GetComponent<CheckLaserActive>().laserHit = true;
-                    }
-                    else
+
+                    if (hit.collider.gameObject != lastActivator)
                     {
 
+                        if (lastActivatorExist)
+                        {
+                            if (hit.collider.tag == "Activable")
+                            {
+                                hit.collider.GetComponent<CheckLaserActive>().changeState();
+                                lastActivator = hit.collider.gameObject;
+                                lastActivatorExist = false;
+                            }
+                        }
+                        else
+                        {
+                            if(lastActivator.CompareTag("Activable"))
+                                lastActivator.GetComponent<CheckLaserActive>().changeState();
+                            else if (hit.collider.CompareTag("Activable"))
+                                hit.collider.GetComponent<CheckLaserActive>().changeState();
+                            lastActivator = hit.collider.gameObject;
+                        }
                     }
+
+
+
 
                     if (hit.collider.tag != "Mirror")
                     {

@@ -38,7 +38,6 @@ public class AnimateDoor : MonoBehaviour
     {
         if (changePosition)
         {
-            print(isActive);
             if (isActive)
             {
                 transform.position = Vector3.LerpUnclamped(transform.position, finalPos, lerpPos * Time.deltaTime);
