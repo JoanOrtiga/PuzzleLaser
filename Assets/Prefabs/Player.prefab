@@ -93,7 +93,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  jumpMultiplier: 8
+  jumpMultiplier: 5
   jumpKey: 32
 --- !u!1 &5959228571450022334
 GameObject:
@@ -297,6 +297,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: PickUp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2524181674669828123, guid: 1242e4f0c9965304eabdfe423f2f81c8,
+        type: 3}
+      propertyPath: rotationSpeed
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2524181674669828123, guid: 1242e4f0c9965304eabdfe423f2f81c8,
+        type: 3}
+      propertyPath: grabDistance
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2524181676268494687, guid: 1242e4f0c9965304eabdfe423f2f81c8,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 2.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1242e4f0c9965304eabdfe423f2f81c8, type: 3}
